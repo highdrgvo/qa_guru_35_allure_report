@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id("io.qameta.allure") version '2.12.0'
+}
+
+group = 'ru.serple'
+version = '1.0-SNAPSHOT'
+
+allure {
+    report {
+        version.set('2.30.0') // Версия Allure Report . Подсветка .set() Если IDE подсвечивает .set() серым, это означает, что можно использовать более краткую форму. Но оба варианта (.set() и прямое присваивание) рабочие.
+    }
+    adapter { // Отвечает за появление папки allure-results в build слева.
+        aspectjWeaver.set(true); // Включение AspectJ для @Step, @Attachment
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.19.0") // Должно совпадать с allure-junit5
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'com.codeborne:selenide:7.8.1'
+    testImplementation('io.qameta.allure:allure-junit5:2.19.0')
+
+}
+
+test {
+    useJUnitPlatform()
+}
