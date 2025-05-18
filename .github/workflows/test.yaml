@@ -19,6 +19,8 @@ jobs:
         with:
           distribution: 'zulu'  # Дистрибутив Zulu OpenJDK
           java-version: '23'   # Версия Java 23
+      - uses: Xotabu4/selenoid-github-action@v2
+
 
       # 3. Запускаем тесты через Gradle
-      - run: ./gradlew clean test
+      - run: ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
