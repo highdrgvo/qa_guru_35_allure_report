@@ -2,7 +2,7 @@
 
 name: Test
 
-on: [push]  # Запускать при push в репозиторий
+on: workflow_dispatch  # [push] Запускать при push в репозиторий
 
 jobs:
   test:
