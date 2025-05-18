@@ -1,19 +1,24 @@
+# Отступы – В YAML важно соблюдать пробелы (не табы!), и каждый уровень вложенности должен быть четко выровнен.
+
 name: Test
 
-on: [push]
+on: [push]  # Запускать при push в репозиторий
 
 jobs:
   test:
-  # где запускаем
-  runs-on: ubuntu-latest
-  # что делаем
-  steps:
-    # 1. Выкачиваем репозиторий
-    - uses: actions/checkout@v3
-    # 2. Настраиваем java
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: '23'
-    #Запуск тестов
-    - run: ./gradlew clean test
+    # Где запускаем
+    runs-on: ubuntu-latest  # Последняя версия Ubuntu
+
+    # Шаги выполнения
+    steps:
+      # 1. Клонируем репозиторий
+      - uses: actions/checkout@v3
+
+      # 2. Устанавливаем Java (Zulu JDK 23)
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'  # Дистрибутив Zulu OpenJDK
+          java-version: '23'   # Версия Java 23
+
+      # 3. Запускаем тесты через Gradle
+      - run: ./gradlew clean test
