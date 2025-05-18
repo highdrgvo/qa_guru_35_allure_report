@@ -2,7 +2,7 @@
 
 name: Test
 
-on: workflow_dispatch  # [push] Запускать при push в репозиторий
+on: workflow_dispatch  # [push] Запускать при push в репозиторий  /  workflow_dispatch - кнопка Run появляется и можно в github прям запускать
 
 jobs:
   test:
