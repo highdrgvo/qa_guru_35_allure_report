@@ -7,7 +7,20 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class LambdaStepsTest {
+public class SearchIssueTabHomeWorkTest {
+
+    @Test
+    public void searchIssueTabPureSelenideTest() {
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
+        open("https://github.com/");
+        $("div.search-input-container").click();
+        $("#query-builder-test").setValue("qa_guru_35_allure_report").pressEnter();
+        $("[href='/highdrgvo/qa_guru_35_allure_report']").click();
+        $("#issues-tab").should(exist);
+    }
+
 
     @Test
     public void searchIssueTabLambdaStepsTest() {
@@ -24,8 +37,22 @@ public class LambdaStepsTest {
         step("Click to repository", () -> {
             $("[href='/highdrgvo/qa_guru_35_allure_report']").click();
         });
-        step("Check that Issue tab is on the page", () -> {
+        step("Check that Issues tab is on the page", () -> {
             $("#issues-tab").should(exist);
         });
     }
+
+    @Test
+    public void searchIssueTabAnnotatedStepsTest() {
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
+        WebStepsHomeWorkTest steps = new WebStepsHomeWorkTest();
+
+        steps.openMainPage();
+        steps.lookingForRepository();
+        steps.clickOnRepositoryLink();
+        steps.checkIssuesTab();
+    }
 }
+
